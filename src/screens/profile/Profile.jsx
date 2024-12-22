@@ -4,9 +4,9 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   TouchableOpacity,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Profile() {
   return (
@@ -18,10 +18,9 @@ export default function Profile() {
       {/* Card 1 */}
       <View style={styles.card}>
         <View style={styles.cardRow}>
-          <Image
-            source={{uri: 'https://via.placeholder.com/100'}}
-            style={styles.userImage}
-          />
+          <View style={styles.iconBorderWrapper}>
+            <Icon name="person" size={65} color="#718093" />
+          </View>
           <View style={styles.textContainer}>
             <Text style={styles.userText}>User Profile comes here</Text>
             <Text style={styles.userText2}>Updated 45 days ago</Text>
@@ -98,6 +97,16 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  iconBorderWrapper: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    borderWidth: 2,
+    borderColor: '#06b6d4', // Border color
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 15,
   },
   userImage: {
     width: 75,

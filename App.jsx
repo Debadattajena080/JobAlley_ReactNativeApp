@@ -13,6 +13,9 @@ import BasedOnApply from './src/screens/jobs/BasedOnApply';
 import EarlyAccess from './src/screens/earlyAccess/EarlyAccess';
 import TopCompanies from './src/screens/topCompanies/TopCompanies';
 import JobDetails from './src/screens/jobs/JobDetails';
+import CustomDrawerContent from './src/navigations/CustomDrawer';
+import CustomHeader from './src/navigations/CustomHeader';
+import AICard from './src/screens/additionalCards/AICards';
 
 function HomeScreen() {
   return (
@@ -20,6 +23,7 @@ function HomeScreen() {
       <ScrollView>
         <Profile />
         <BasedOnApply />
+        <AICard />
         <TopCompanies />
         <EarlyAccess />
         <Footer />
@@ -73,10 +77,19 @@ function BottomTabNavigation() {
 const DrawerTabs = createDrawerNavigator();
 function DrawerNavigation() {
   return (
-    <DrawerTabs.Navigator>
+    <DrawerTabs.Navigator
+      drawerContent={props => <CustomDrawerContent {...props} />}
+      screenOptions={{
+        header: ({navigation}) => <CustomHeader navigation={navigation} />,
+      }}
+    >
       <DrawerTabs.Screen name="Dashboard" component={BottomTabNavigation} />
-      <DrawerTabs.Screen name="Settings" component={EarlyAccess} />
-      <DrawerTabs.Screen name="Notifications" component={TopCompanies} />
+      <DrawerTabs.Screen name="EarlyAccess" component={EarlyAccess} />
+      <DrawerTabs.Screen name="TopCompanies" component={TopCompanies} />
+      <DrawerTabs.Screen name="Profile performance" component={TopCompanies} />
+      <DrawerTabs.Screen name="My services" component={TopCompanies} />
+      <DrawerTabs.Screen name="Write to us" component={EarlyAccess} />
+      <DrawerTabs.Screen name="About us" component={TopCompanies} />
     </DrawerTabs.Navigator>
   );
 }
