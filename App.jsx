@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
@@ -8,16 +8,25 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Profile from './src/screens/profile/Profile';
+import ProfileDetails from './src/screens/profile/ProfileDetails';
 import Footer from './src/screens/footer/Footer';
 import BasedOnApply from './src/screens/jobs/BasedOnApply';
 import EarlyAccess from './src/screens/earlyAccess/EarlyAccess';
 import TopCompanies from './src/screens/topCompanies/TopCompanies';
-import JobDetails from './src/screens/jobs/JobDetails';
+import AppliedJobs from './src/screens/jobs/AppliedJobs';
 import CustomDrawerContent from './src/navigations/CustomDrawer';
 import CustomHeader from './src/navigations/CustomHeader';
 import AICard from './src/screens/additionalCards/AICards';
+import onDisplayNotification from './src/utility/DisplayNotifications';
 
 function HomeScreen() {
+  useEffect(() => {
+    const interval = setInterval(() => {
+      onDisplayNotification();
+    }, 600000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -67,9 +76,9 @@ function BottomTabNavigation() {
         tabBarInactiveTintColor: '#2F363F',
       })}>
       <BottomTabs.Screen name="Home" component={HomeScreen} />
-      <BottomTabs.Screen name="Apply" component={JobDetails} />
-      <BottomTabs.Screen name="NVites" component={JobDetails} />
-      <BottomTabs.Screen name="Profile" component={Profile} />
+      <BottomTabs.Screen name="Apply" component={AppliedJobs} />
+      <BottomTabs.Screen name="NVites" component={AppliedJobs} />
+      <BottomTabs.Screen name="Profile" component={ProfileDetails} />
     </BottomTabs.Navigator>
   );
 }
@@ -81,8 +90,7 @@ function DrawerNavigation() {
       drawerContent={props => <CustomDrawerContent {...props} />}
       screenOptions={{
         header: ({navigation}) => <CustomHeader navigation={navigation} />,
-      }}
-    >
+      }}>
       <DrawerTabs.Screen name="Dashboard" component={BottomTabNavigation} />
       <DrawerTabs.Screen name="EarlyAccess" component={EarlyAccess} />
       <DrawerTabs.Screen name="TopCompanies" component={TopCompanies} />
