@@ -46,7 +46,7 @@ function CustomDrawerContent(props) {
         />
         <DrawerItem
           label="Profile performance"
-          onPress={() => props.navigation.navigate('Notifications')}
+          onPress={() => props.navigation.navigate('Profile performance')}
           icon={({color, size}) => (
             <Icon name="timeline" size={size} color="#06b6d4" />
           )}

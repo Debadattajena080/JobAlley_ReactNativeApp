@@ -1,9 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useNavigation} from '@react-navigation/native';
 
 const AppliedJobs = () => {
+  const navigation = useNavigation();
   const jobs = [
     {
       id: '1',
@@ -113,7 +115,9 @@ const AppliedJobs = () => {
   ];
 
   const renderJobCard = ({item}) => (
-    <View style={styles.card}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('AppliedJobDetails')}
+      style={styles.card}>
       <View style={styles.row}>
         <Icon
           name="briefcase-outline"
@@ -141,15 +145,11 @@ const AppliedJobs = () => {
           <Text style={styles.detailText}>{item.recruiterActive}</Text>
         </View>
         <View style={styles.detailItem2}>
-          <Icon
-            name="checkmark-circle"
-            size={20}
-            color="#06b6d4"
-          />
+          <Icon name="checkmark-circle" size={20} color="#06b6d4" />
           <Text style={styles.detailText}>{item.additionalInfo}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (

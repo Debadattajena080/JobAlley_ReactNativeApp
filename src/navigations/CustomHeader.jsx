@@ -5,20 +5,23 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 export default function CustomHeader({navigation}) {
   return (
     <View style={styles.headerContainer}>
+      {/* Drawer Menu Icon */}
       <TouchableOpacity
         onPress={() => navigation.openDrawer()}
         style={styles.iconWrapper}>
         <Icon name="menu" size={28} color="#333" />
       </TouchableOpacity>
 
+      {/* Search Bar */}
       <View style={styles.searchWrapper}>
         <TextInput
           style={styles.searchInput}
           placeholder="Search"
-          placeholderTextColor="#aaa"
+          placeholderTextColor="#666"
         />
       </View>
 
+      {/* Notifications Icon */}
       <TouchableOpacity style={styles.iconWrapper}>
         <Icon name="notifications" size={28} color="#333" />
       </TouchableOpacity>
@@ -51,7 +54,6 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     flex: 1,
-    height: 40,
     fontSize: 16,
     color: '#333',
   },
